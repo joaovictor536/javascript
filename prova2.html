@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let idade = Number(prompt("digite sua idade"))
+        let registro = Number(prompt("status do registro (0 para não registrado e 1 para registrado )"))
+        
+
+        switch(registro){
+            case 1:
+                alert("boas vindas");
+                break;
+            case 0:
+                alert("voce não esta registrado");
+                break;
+            default:
+                console.log(alert("Status desconhecido"));
+        }
+        if (idade >= 18 && registro === 1) {
+                alert("acesso completo");    
+        }else {
+                alert("acesso limitado")
+        };
+    </script>
+</body>
+</html>
