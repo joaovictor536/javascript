@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Compras (console + prompt)</title>
+</head>
+<body>
+  <h3>Abra o console do navegador (F12) para ver a lista</h3>
+
+  <script>
+    let lista = [];
+
+    function mostrarLista() {
+      if (lista.length === 0) {
+        console.log("Lista vazia.");
+        return;
+      }
+      console.log("\nLista atual:");
+      lista.forEach((item, i) => console.log(`${i} → ${item}`));
+      console.log("---");
+    }
+
+    function menu() {
+      const opcao = prompt(
+        "1 = Adicionar\n2 = Remover\n3 = Atualizar\n4 = Mostrar lista\n5 = Sair\n\nEscolha:"
+      );
+
+      if (opcao === "1") {
+        const item = prompt("Digite o item:");
+        if (item?.trim()) {
+          lista.push(item.trim());
+          console.log(`Adicionado: ${item}`);
+        }
+        menu();
+      }
+      else if (opcao === "2") {
+        mostrarLista();
+        const idx = Number(prompt("Número do item a remover:"));
+        if (!isNaN(idx) && idx >= 0 && idx < lista.length) {
+          const removido = lista.splice(idx, 1)[0];
+          console.log(`Removido: ${removido}`);
+        } else {
+          console.log("Índice inválido");
+        }
+        menu();
+      }
+      else if (opcao === "3") {
+        mostrarLista();
+        const idx = Number(prompt("Número do item a atualizar:"));
+        if (!isNaN(idx) && idx >= 0 && idx < lista.length) {
+          const novo = prompt("Novo valor:");
+          if (novo?.trim()) {
+            const antigo = lista[idx];
+            lista[idx] = novo.trim();
+            console.log(`"${antigo}" → "${novo}"`);
+          }
+        } else {
+          console.log("Índice inválido");
+        }
+        menu();
+      }
+      else if (opcao === "4") {
+        mostrarLista();
+        menu();
+      }
+      else if (opcao === "5") {
+        console.log("Saindo...");
+      }
+      else {
+        console.log("Opção inválida");
+        menu();
+      }
+    }
+
+    console.log("Lista de Compras (use prompt no navegador)");
+    console.log("----------------------------------------");
+    menu();
+  </script>
+</body>
+</html>
