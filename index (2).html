@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Consumo de API</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    button {
+      margin-bottom: 15px;
+    }
+
+    .usuario {
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+    }
+
+    .erro {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Usuários da API</h1>
+
+  <button id="buscar">Buscar</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    const botao = document.getElementById("buscar");
+    const resultado = document.getElementById("resultado");
+
+    botao.addEventListener("click", async function () {
+      resultado.innerHTML = "";
+
+      try {
+        const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
+
+        if (!resposta.ok) {
+          throw new Error("Erro ao buscar os dados da API");
+        }
+
+        const dados = await resposta.json();
+
+        dados.forEach(usuario => {
+          const div = document.createElement("div");
+          div.classList.add("usuario");
+
+          div.innerHTML = `
+            <p><strong>Nome:</strong> ${usuario.name}</p>
+            <p><strong>Email:</strong> ${usuario.email}</p>
+          `;
+
+          resultado.appendChild(div);
+        });
+
+      } catch (erro) {
+        const mensagemErro = document.createElement("p");
+        mensagemErro.classList.add("erro");
+        mensagemErro.textContent = "Erro ao buscar os dados. A API não está respondendo.";
+        resultado.appendChild(mensagemErro);
+      }
+    });
+  </script>
+
+</body>
+</html>
