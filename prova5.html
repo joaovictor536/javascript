@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerenciador de Tarefas</title>
+</head>
+<body>
+
+
+<script>
+let tarefas = [];
+
+while (true) {
+  console.clear();
+  console.log("1 - Adicionar");
+  console.log("2 - Listar");
+  console.log("3 - Remover");
+  console.log("4 - Concluir");
+  console.log("0 - Sair");
+
+  let opcao = prompt("1: Adicionar\n2: Listar\n3: Remover\n4: Concluir\n0: Sair\n\nOpção:");
+
+  if (opcao === "0") break;
+
+  if (opcao === "1") {
+    let nome = prompt("Tarefa:");
+    if (nome?.trim()) tarefas.push(nome.trim());
+  }
+
+  else if (opcao === "2") {
+    tarefas.forEach((t, i) => console.log(i + ": " + t));
+  }
+
+  else if (opcao === "3") {
+    let idx = Number(prompt("Número:"));
+    if (idx >= 0 && idx < tarefas.length) tarefas.splice(idx, 1);
+  }
+
+  else if (opcao === "4") {
+    let idx = Number(prompt("Número:"));
+    if (idx >= 0 && idx < tarefas.length && !tarefas[idx].startsWith("✅ ")) {
+      tarefas[idx] = "✅ " + tarefas[idx];
+    }
+  }
+}
+</script>
+
+</body>
+</html>
