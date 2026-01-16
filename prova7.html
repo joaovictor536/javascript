@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciador de Nomes</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>Gerenciador de Nomes (Array Methods)</h1>
+    <p>Abra o console (F12) e clique abaixo.</p>
+    <button onclick="iniciar()">Iniciar Programa</button>
+
+    <script>
+        function iniciar() {
+            let nomes = [];
+            let continuar = true;
+
+            while (continuar) {
+                let opcao = prompt(
+                    "1: Adicionar Nome \n" +
+                    "2: Filtrar por Letra \n" +
+                    "3: Buscar Nome \n" +
+                    "4: Maiúsculas \n" +
+                    "5: Validar Tamanho > 3 \n" +
+                    "6: Sair"
+                );
+
+                switch (opcao) {
+                    case "1": 
+                        let novoNome = prompt("Digite um nome:");
+                        if (novoNome) {
+                            nomes.push(novoNome);
+                            console.log("Lista atual:", nomes);
+                        }
+                        break;
+
+                    case "2": 
+                        let letra = prompt("Digite a letra inicial:");
+                        
+                        let filtrados = nomes.filter(nome => nome.startsWith(letra));
+                        console.log(`Nomes começando com '${letra}':`, filtrados);
+                        break;
+
+                    case "3": 
+                        let busca = prompt("Qual nome procura?");
+                
+                        let encontrado = nomes.find(nome => nome === busca);
+                        console.log("Resultado da busca:", encontrado ? encontrado : "Não encontrado");
+                        break;
+
+                    case "4":
+                        let maiusculas = nomes.map(nome => nome.toUpperCase());
+                        console.log("Nomes em maiúsculo:", maiusculas);
+                        break;
+
+                    case "5":
+                        let validacao = nomes.every(nome => nome.length > 3);
+                        console.log("Todos têm mais de 3 letras?", validacao);
+                        break;
+
+                    case "6":
+                    case null:
+                        continuar = false;
+                        console.log("Encerrando...");
+                        break;
+
+                    default:
+                        console.log("Opção inválida.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
