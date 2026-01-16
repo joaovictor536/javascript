@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário com Eventos DOM</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    input {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+
+    .item {
+      margin: 5px 0;
+      padding: 5px;
+      border-bottom: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Cadastro de Usuário</h1>
+
+  
+  <form id="meuFormulario">
+
+    <input type="text" id="usuario" placeholder="Nome de usuário">
+    <input type="password" id="senha" placeholder="Senha">
+    <input type="tel" id="telefone" placeholder="Telefone">
+    <input type="date" id="dataNascimento">
+    <input type="email" id="email" placeholder="E-mail">
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <button id="limparLista">Limpar Lista</button>
+
+  <h2>Dados Enviados</h2>
+  <div id="lista"></div>
+
+  <script>
+    
+    const formulario = document.getElementById("meuFormulario");
+    const lista = document.getElementById("lista");
+    const btnLimpar = document.getElementById("limparLista");
+
+    
+    formulario.addEventListener("submit", function (event) {
+      event.preventDefault(); // impede recarregar a página
+
+      const usuario = document.getElementById("usuario").value;
+      const senha = document.getElementById("senha").value;
+      const telefone = document.getElementById("telefone").value;
+      const dataNascimento = document.getElementById("dataNascimento").value;
+      const email = document.getElementById("email").value;
+
+    
+      if (
+        usuario === "" ||
+        senha === "" ||
+        telefone === "" ||
+        dataNascimento === "" ||
+        email === ""
+      ) {
+        console.log("Erro: Preencha todos os campos.");
+        return;
+      }
+
+ 
+      const item = document.createElement("div");
+      item.classList.add("item");
+
+      item.innerHTML = `
+        <p><strong>Usuário:</strong> ${usuario}</p>
+        <p><strong>Telefone:</strong> ${telefone}</p>
+        <p><strong>Data de Nascimento:</strong> ${dataNascimento}</p>
+        <p><strong>E-mail:</strong> ${email}</p>
+      `;
+
+      lista.appendChild(item);
+
+      
+      formulario.reset();
+    });
+
+    
+    btnLimpar.addEventListener("click", function () {
+      lista.innerHTML = "";
+    });
+  </script>
+
+</body>
+</html>
