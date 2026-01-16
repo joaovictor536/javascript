@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=/, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //  Um objeto literal em JavaScript é uma forma de criar um objeto
+        //  usando a notação { chave: valor, ... }.
+        //  Nele você guarda propriedades (dados) e métodos (funções).
+        //  Métodos normalmente usam this para acessar outras propriedades do mesmo objeto.
+         const aluno = {
+            nome: "João",
+            notas: [8, 7.5, 9],
+            calcularMedia() {
+                if (this.notas.length === 0) return 0;
+                const soma = this.notas.reduce((acc, n) => acc + n, 0);
+                return soma / this.notas.length;
+            }
+        };
+
+        const { nome } = aluno;
+        console.log("Nome:", nome);
+
+        const novaNota = 10;
+        aluno.notas = [...aluno.notas, novaNota];
+
+        console.log("Notas:", aluno.notas);
+        console.log("Média:", aluno.calcularMedia());
+    </script>
+</body>
+</html>
