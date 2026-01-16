@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Usuários</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    input {
+      display: block;
+      margin-bottom: 5px;
+      width: 250px;
+    }
+
+    .erro {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .sucesso {
+      color: green;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Cadastro de Usuário</h1>
+
+  <form id="formCadastro">
+
+    <input type="text" id="nome" placeholder="Nome">
+    <div id="erroNome" class="erro"></div>
+
+    <input type="text" id="usuario" placeholder="Usuário">
+    <div id="erroUsuario" class="erro"></div>
+
+    <input type="password" id="senha" placeholder="Senha">
+    <div id="erroSenha" class="erro"></div>
+
+    <input type="email" id="email" placeholder="Email">
+    <div id="erroEmail" class="erro"></div>
+
+    <input type="number" id="idade" placeholder="Idade">
+    <div id="erroIdade" class="erro"></div>
+
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <div id="mensagemSucesso" class="sucesso"></div>
+
+  <script>
+    const form = document.getElementById("formCadastro");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      // Limpa mensagens anteriores
+      document.getElementById("erroNome").textContent = "";
+      document.getElementById("erroUsuario").textContent = "";
+      document.getElementById("erroSenha").textContent = "";
+      document.getElementById("erroEmail").textContent = "";
+      document.getElementById("erroIdade").textContent = "";
+      document.getElementById("mensagemSucesso").textContent = "";
+
+      try {
+        const nome = document.getElementById("nome").value;
+        const usuario = document.getElementById("usuario").value;
+        const senha = document.getElementById("senha").value;
+        const email = document.getElementById("email").value;
+        const idade = Number(document.getElementById("idade").value);
+
+        if (nome === "") {
+          throw { campo: "erroNome", mensagem: "Nome é obrigatório." };
+        }
+
+        if (usuario === "") {
+          throw { campo: "erroUsuario", mensagem: "Usuário é obrigatório." };
+        }
+
+        if (senha === "") {
+          throw { campo: "erroSenha", mensagem: "Senha é obrigatória." };
+        }
+
+        if (email === "") {
+          throw { campo: "erroEmail", mensagem: "Email é obrigatório." };
+        }
+
+        if (idade === "" || idade < 18) {
+          throw { campo: "erroIdade", mensagem: "Idade deve ser maior ou igual a 18 anos." };
+        }
+
+        // Cadastro bem-sucedido
+        document.getElementById("mensagemSucesso").textContent =
+          "Cadastro realizado com sucesso!";
+
+        form.reset();
+
+      } catch (erro) {
+        document.getElementById(erro.campo).textContent = erro.mensagem;
+      }
+    });
+  </script>
+
+</body>
+</html>
